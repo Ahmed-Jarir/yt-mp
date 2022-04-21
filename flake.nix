@@ -8,7 +8,13 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in {
       devShell = pkgs.mkShell {
-        nativeBuildInputs = with pkgs; [ python3 python39Packages.youtube-dl python39Packages.pytube ];
+			  nativeBuildInputs = with pkgs; [ 
+
+			  python3 
+			  python39Packages.youtube-dl 
+			  python39Packages.pytube 
+			  ffmpeg];
+
         buildInputs = [ ];
       };
     });
