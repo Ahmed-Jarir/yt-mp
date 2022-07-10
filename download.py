@@ -15,17 +15,17 @@ def downloadlink(vid, av, isplaylist = False, playlistname = "music/"):
 		filename = playlistname + filename
 	filename = f"{os.path.expanduser('~')}/Music/{filename}"
 	if not av: 
-	 options={
-		 'format':'bestaudio/best',
-		 'keepvideo':False,
-		 'outtmpl':filename,
-		 'cookiefile': 'cookies.txt',
-	 }
+	    options={
+	        'format':'bestaudio/best',
+	        'keepvideo':False,
+	        'outtmpl':filename,
+	        'cookiefile': 'cookies.txt',
+	    }
 	else:
-	 options={
-		 'format':'bestvideo+bestaudio/best',
-		 'outtmpl':filename,
-	 }
+	    options={
+	        'format':'bestvideo+bestaudio/best',
+	        'outtmpl':filename,
+	    }
 	
 	with youtube_dl.YoutubeDL(options) as ydl:
 	 ydl.download([video_info['webpage_url']])
