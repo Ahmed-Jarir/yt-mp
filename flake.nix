@@ -12,8 +12,11 @@
 
 			  python3 
 			  python39Packages.youtube-dl 
-			  python39Packages.pytube 
+              python39Packages.pytube 
+              python39Packages.setuptools
+              python39Packages.build
               ffmpeg
+
               ];
 
         buildInputs = [ ];

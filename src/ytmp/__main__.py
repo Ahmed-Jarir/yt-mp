@@ -14,11 +14,10 @@ def download(av, linku):
     else:
         dl(linku, av)
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
-    
-    parser.add_argument("-v", "--video", dest = "video", help="for mp4/video download", nargs = "*", default="none")
-    parser.add_argument("-a", "--audio",dest ="audio", help="for mp3/audio download", nargs = "*", default="none")
+    parser.add_argument("-v", "--video", dest = "video", help="for mp4/video download", nargs = "*", default=["none"])
+    parser.add_argument("-a", "--audio",dest ="audio", help="for mp3/audio download", nargs = "*", default=["none"])
     args = parser.parse_args();
 
     
@@ -28,3 +27,5 @@ if __name__ == "__main__":
     #video
     for linku in args.video:
         download(True,args.video)
+if __name__ == "__main__":
+    main()
