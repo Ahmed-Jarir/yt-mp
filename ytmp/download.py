@@ -1,9 +1,9 @@
 import subprocess as pr
-import youtube_dl
+import yt_dlp as yd
 import getpass
 import os
 def downloadlink(vid, av, isplaylist = False, playlistname = "music/"):
-	video_info = youtube_dl.YoutubeDL().extract_info(
+	video_info = yd.YoutubeDL().extract_info(
 		url = vid,download=False
 	)
 	m34 = "mp4" if av else "mp3"
@@ -18,8 +18,7 @@ def downloadlink(vid, av, isplaylist = False, playlistname = "music/"):
 	    options={
 	        'format':'bestaudio/best',
 	        'keepvideo':False,
-	        'outtmpl':filename,
-	        'cookiefile': 'cookies.txt',
+	        'outtmpl':filename
 	    }
 	else:
 	    options={
@@ -27,6 +26,6 @@ def downloadlink(vid, av, isplaylist = False, playlistname = "music/"):
 	        'outtmpl':filename,
 	    }
 	
-	with youtube_dl.YoutubeDL(options) as ydl:
+	with yd.YoutubeDL(options) as ydl:
 	 ydl.download([video_info['webpage_url']])
 

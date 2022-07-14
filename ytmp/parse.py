@@ -1,4 +1,4 @@
-from download import downloadlink
+from ytmp.download import downloadlink
 import pytube
 def parse(url,av):
     yt = pytube.Playlist(f'{url}')

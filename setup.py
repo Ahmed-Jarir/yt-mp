@@ -1,13 +1,7 @@
-from setuptools import setup
-setup(
-  name='ytmp',
-  #packages=['someprogram'],
-  version='0.1.0',
-  #author='...',
-  #description='...',
-  entry_points={
-        "console_scripts": [
-            "ytmp = __main__:main",
-        ],
-  },
-)
+#!/usr/bin/env python
+# type: ignore
+
+import setuptools
+
+if __name__ == "__main__":
+    setuptools.setup()

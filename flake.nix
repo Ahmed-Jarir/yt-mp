@@ -1,25 +1,27 @@
 {
-  description = "A basic flake with a shell";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  outputs = { self, nixpkgs, flake-utils, mach-nix }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      devShell = pkgs.mkShell {
-			  nativeBuildInputs = with pkgs; [ 
+        mach-nix-lib = import mach-nix {
+          inherit pkgs;
+          python = "python310";
+        };
 
-			  python3 
-			  python39Packages.youtube-dl 
-              python39Packages.pytube 
-              python39Packages.setuptools
-              python39Packages.build
-              ffmpeg
+        ytmp = mach-nix-lib.buildPythonPackage ./.;
+      in {
+        packages = { inherit ytmp; };
+        defaultPackage = ytmp;
 
-              ];
-
-        buildInputs = [ ];
-      };
-    });
+        devShell = pkgs.mkShell {
+          inputsFrom = builtins.attrValues self.packages.${system};
+          buildInputs = with pkgs; [
+            mypy
+            black
+            python310Packages.pytest
+            python310Packages.pytestcov
+          ];
+        };
+      });
 }
