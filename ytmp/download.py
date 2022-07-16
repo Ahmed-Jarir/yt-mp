@@ -8,24 +8,26 @@ def downloadlink(vid, av, isplaylist = False, playlistname = "music/"):
 	)
 	m34 = "mp4" if av else "mp3"
 	filename = f"{video_info['title']}.{m34}"
+	
+	remLetters = ['/','|',':','?','%']
 	for ind,let in enumerate(filename,0):
-		if let == "/" or let == "|" or let == ":" or let == "?":
+		if let in remLetters: 
 			filename = filename[:ind] + filename[ind+1:]
 	if isplaylist is True:
 		filename = playlistname + filename
 	filename = f"{os.path.expanduser('~')}/Music/{filename}"
 	if not av: 
-	    options={
-	        'format':'bestaudio/best',
-	        'keepvideo':False,
-	        'outtmpl':filename
-	    }
+		options={
+			'format':'bestaudio/best',
+			'keepvideo':False,
+			'outtmpl':filename
+		}
 	else:
-	    options={
-	        'format':'bestvideo+bestaudio/best',
-	        'outtmpl':filename,
-	    }
+		options={
+			'format':'bestvideo+bestaudio/best',
+			'outtmpl':filename,
+		}
 	
 	with yd.YoutubeDL(options) as ydl:
-	 ydl.download([video_info['webpage_url']])
+		ydl.download([video_info['webpage_url']])
 
